@@ -54,6 +54,14 @@ const Home = () => {
             <h2>See What Everyone Is Talking About In Football Today!</h2>
 
             <div className="sort">
+
+                <label htmlFor="search">Search by title: </label>
+                <input
+                    className='search'
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder='Search by title'
+                />
                 <label htmlFor="sort">Sort Posts by: </label>
                 <select
                     name="sort"
@@ -70,7 +78,7 @@ const Home = () => {
 
             <div className='posts'>
                 
-                {posts.map((post) => (
+            {posts.filter((post) =>post.title.toLowerCase().includes(searchTerm.toLowerCase())).map((post) => (
                     <div className="post-preview" key={post.id}>
                         <Link to={`/view/${post.id}`}>
                             <h2>{post.title}</h2>
