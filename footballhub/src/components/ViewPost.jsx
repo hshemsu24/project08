@@ -26,7 +26,7 @@ const ViewPost = () => {
           if (error) {
             console.error('Error fetching post: ', error);
           } else {
-            setPost({ ...data, comments: data.comments || [] });
+            setPost({ ...data, comments: data.comments || [] }); // Ensure comments is an array
             setUpdatedPost({
               title: data.title,
               content: data.content,
@@ -34,7 +34,7 @@ const ViewPost = () => {
             });
           }
         };
-    
+      
         fetchPost();
       }, [id]);
 
@@ -148,10 +148,9 @@ const ViewPost = () => {
           <button onClick={addComment}>Add Comment</button>
 
           <h3>Comments</h3>
-          {post.comments &&
-            post.comments.map((comment, index) => (
-              <div className='comment' key={index}>{comment}</div>
-            ))}
+          {post.comments && Array.isArray(post.comments) && post.comments.map((comment, index) => (
+  <div className='comment' key={index}>{comment}</div>
+))}
         </div>
       )}
         </div>
